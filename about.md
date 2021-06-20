@@ -18,8 +18,8 @@ any no-evidence-based "revolutionary discovery/techonology".</p>
 <ul class="skill-list">
 	<li>Data analysis, mathematical modeling</li>
 	<li>Python: numpy, scipy, pandas, scikit-learn, keras/tensorflow, pytorch</li>
-	<li>R<li>
-	<li>MATLAB<li>
+	<li>R</li>
+	<li>MATLAB</li>
 	<li>Java</li>
 	<li>C</li>
 </ul>
