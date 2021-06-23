@@ -43,3 +43,6 @@ It considers the sequence of steps as a unique monolitic process, meaning that y
 
 # Some simulations
 I am not going to discuss how Pipeline should be practically used in depth, you can find the in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object Pipeline works, technically. After all, what is better than understanding code by coding? 😉
+
+## Data generation
+For these simulations we are going to use a simulated dataset, and our task will be binary classification.
