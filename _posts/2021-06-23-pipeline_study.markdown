@@ -42,4 +42,4 @@ Pipeline allows you to apply a sequence of steps (pre-processing steps and model
 It considers the sequence of steps as a unique monolitic process, meaning that you can use it almost anywhere as if you were applying a simple data transformation/fitting.
 
  # Some simulations
- I am not going to discuss how Pipeline should be practically used in depth, you can find the in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object Pipeline works, technically. After all, what is better than understanding code by coding :wink:?
+ I am not going to discuss how Pipeline should be practically used in depth, you can find the in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object Pipeline works, technically. After all, what is better than understanding code by coding? :wink:
