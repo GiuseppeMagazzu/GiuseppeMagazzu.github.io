@@ -46,4 +46,4 @@ I am not going to discuss how Pipeline should be practically used in depth, you 
 
 ## Data generation
 For these simulations we are going to use a simulated dataset, and our task will be binary classification: 
-{ % gist GiuseppeMagazzu/fbbff3db1a4a8f8cbffe98fe13a20986 % }
+<script src="https://gist.github.com/GiuseppeMagazzu/fbbff3db1a4a8f8cbffe98fe13a20986.js"></script>
