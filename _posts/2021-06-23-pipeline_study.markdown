@@ -45,5 +45,11 @@ It considers the sequence of steps as a unique monolitic process, meaning that y
 I am not going to discuss how Pipeline should be practically used in depth, you can find the in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object Pipeline works, technically. After all, what is better than understanding code by coding? 😉
 
 ## Data generation
-For these simulations we are going to use a simulated dataset, and our task will be binary classification: 
+For these simulations we are going to use a simulated dataset, and our task will be binary (balanced) classification: 
 <script src="https://gist.github.com/GiuseppeMagazzu/fbbff3db1a4a8f8cbffe98fe13a20986.js"></script>
+
+## Example 1
+Let's start with a simple, basic example. We are going to use Pipeline with a support vector machine. Please remember that we are not trying to develop a proper machine learning model, but instead to explain how Pipeline really works, with plainer code.
+
+
+
