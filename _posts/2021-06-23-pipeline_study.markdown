@@ -56,3 +56,41 @@ Let's start with a simple, basic example. We are going to use Pipeline with a su
 
 <script src="https://gist.github.com/GiuseppeMagazzu/d8d503be52ff502a44f9be9351b3b57c.js"></script>
 
+The two approached above return the same exact result, meaning they are equivalent. Basically in this case Pipeline is completely useless, since there are no machine learning steps to compose into a unique block. But let's move to a slighlty (we will be going very slow, no worries!) more complex example.
+
+## Example 2
+Now we actually want to make a real "machine learning pipeline", by scaling first our data and then training a support vector machine.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/63fdfe1c3d3b378cb74eacca80644563.js"></script>
+
+Again, the two results above should be identical. In this case the Pipeline object is indeed useful, since we only need to run `fit()` once. Likely, however, Pipeline does much more! Let's see another example.
+
+## Example 3
+We said that a machine learning practitioner could have some problems if not being careful when using a cross-validation procedure. Let's see how Pipeline can help us.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/7c2c11f938e3a9be42ec7dcf756d0295.js"></script>
+
+The code above produces two exact results. And guess what? Pipeline applies the defined steps in each different split, solving the data-leakage problem that we discussed before. This is actually done within the `cross_val_score` function, but Pipeline allows us to perform those steps as a unique process.
+
+## Example 4
+I know what you are saying: "Giuseppe, these examples are too simple. I need to optimize my models, I need to optimize the entire pipeline! How is Pipeline going to fit into this?". Hey, calm down. Just look below.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/228ae3f254e0556c332a15264b896315.js"></script>
+
+This is a super basic example of the use of a grid search to optimize a model. Now let's see how nicely Pipeline handled this.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/64e29344e9bbb4da553d91ac72c467fc.js"></script>
+
+This is what you should do to replicate the results of the previous code snippet (more scary snippets to come, if you cannot stand down please stop reading NOW!). And yes, I am hearing what you are saying: "Couldn't I just use grid search after scaling the data?". NO! Read back what we said: if you scale the data outside the cross-validation procedure, you are *contaminating* the splits within the procedure, since they have been scaled with parameters obtained from data which is now in other folders.
+
+## Example 5
+Let's see how it looks if we have to optimize more than one hyperparameter in our model.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/d76acb64006f8c14bf16eeb86d2e3f1b.js"></script>
+
+Without Pipeline, a proper validation would require this instead:
+
+<script src="https://gist.github.com/GiuseppeMagazzu/c68d998feb448fbca6f1026e27befdfc.js"></script>
+
+One for-loop more, if compared with our previous example. And we are just optimizing two hyperparameters of one model!
+
