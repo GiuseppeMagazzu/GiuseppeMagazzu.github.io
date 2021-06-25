@@ -92,5 +92,32 @@ Without Pipeline, a proper validation would require this instead:
 
 <script src="https://gist.github.com/GiuseppeMagazzu/c68d998feb448fbca6f1026e27befdfc.js"></script>
 
-One for-loop more, if compared with our previous example. And we are just optimizing two hyperparameters of one model!
+One for-loop more, if compared with our previous example. And we are just optimizing two hyperparameters of one model! Let's see how Pipeline can save us code (and time!) in a real situation.
 
+## Example 6
+In general, we have to optimize multiple models, and compare their performance. Not only this, we have to optimize the pre-processing in the pipeline, choosing what steps to perform. Here is an example that shows exactly this.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/e03169ccba33f876fa2e7c43c82fed0e.js"></script>
+
+To simulate this, we really need to write a lot of code. Please not how the execution time is very similar, meaning that Pipeline is well optimized (as its internal mechanism is not exactly a "for-loop").
+
+<script src="https://gist.github.com/GiuseppeMagazzu/1e17e3a640037af317996468c328e0aa.js"></script>
+
+And now let's see if the two results are identical:
+
+<script src="https://gist.github.com/GiuseppeMagazzu/483ee14c8df9a4aeb0b36d9fcf662249.js"></script>
+
+## Example 7
+Finally, for our last example, let's see how Pipeline allows us to easily adopt an extremely common and fundamental framework (have a look at my post about nested cross-validation).
+First we use Pipeline (code inspired by [this](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) Scikit-learn's example).
+
+<script src="https://gist.github.com/GiuseppeMagazzu/703706762e3c397dcd939db8fe4292f8.js"></script>
+
+You ready to see how much code we saved by adopting Pipeline, to properly implement a nested cross-validation?
+Here's the code:
+
+<script src="https://gist.github.com/GiuseppeMagazzu/f47cd22bd4b557eae5774e488a971dcc.js"></script>
+
+# Conclusion
+I bet you now have realized the importance of adopting Pipeline when working on your machine learning projects. Please, remember that the all point of the post was not about how to use Pipeline, but about how it works in common every-day frameworks and why you should use it.
+Make your machine learning projects happy, validate them fairly!
