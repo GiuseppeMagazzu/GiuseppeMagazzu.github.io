@@ -42,14 +42,14 @@ How can we solve this when working in Python? Well, the answer is straightforwar
 It considers the sequence of steps as a unique block, meaning that you can use it almost anywhere as if you were applying a simple operation to your data.
 
 # Some simulations
-I am not going to discuss how `Pipeline` should be practically used in depth, you can find the in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object `Pipeline` works, technically. After all, what is better than understanding code by coding? 😉
+I am not going to discuss in depth how `Pipeline` should be practically used, you can find that in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object `Pipeline` works, technically. After all, what better than coding to understand code? 😉
 
 ## Data generation
 For these simulations we are going to use a simulated dataset, and our task will be binary (balanced) classification:
 
 <script src="https://gist.github.com/GiuseppeMagazzu/fbbff3db1a4a8f8cbffe98fe13a20986.js"></script>
 
-Please also note that we defined `random_state=1` in order to make the results reproducible. In theory, as [suggested by Scikit-learn's User Guide](https://scikit-learn.org/stable/common_pitfalls.html), we should leave `random_state` to the default value in the models (in general you want to estimate the robustness of your algorithms with respect to their randomness). This way, only the data and the splits will be reproducible, but not the model. However, we want to demonstrate that our code is equivalent to the internal code in `Pipeline`, so the results need to be identical.
+Please also note that we defined `random_state=1` in order to make the results reproducible. In theory, [as suggested](https://scikit-learn.org/stable/common_pitfalls.html) by Scikit-learn's User Guide, we should leave `random_state` to the default value in the models (in general you want to estimate the robustness of your algorithms with respect to their randomness). This way, only the data and the splits will be reproducible, but not the model. However, we want to demonstrate that our code is equivalent to the internal code in `Pipeline`, so the results need to be identical.
 
 ## Example 1
 Let's start with a simple, basic example. We are going to use `Pipeline` with a support vector machine. Please remember that we are not trying to develop a proper machine learning model, but instead to explain how `Pipeline` really works, with plainer code.
