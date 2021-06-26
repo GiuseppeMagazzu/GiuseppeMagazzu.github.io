@@ -9,7 +9,7 @@ tag:
 - pipeline
 - cross-validation
 - data-leakage
-star: True
+star: False
 category: blog
 author: giuseppemagazzu
 description: Importance and usage of Scikit-learn's Pipeline
@@ -42,7 +42,7 @@ How can we solve this when working in Python? Well, the answer is straightforwar
 It considers the sequence of steps as a unique block, meaning that you can use it almost anywhere as if you were applying a simple operation to your data.
 
 # Some simulations
-I am not going to discuss in depth how `Pipeline` should be practically used, you can find that in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object `Pipeline` works, technically. After all, what better than coding to understand code? 😉
+I am not going to discuss in depth how `Pipeline` should be used in practice, you can find that in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). What I am going to present to you is some simulations to better understand how the object `Pipeline` works, basically. After all, what's better than coding to understand code? 😉
 
 ## Data generation
 For these simulations we are going to use a simulated dataset, and our task will be binary (balanced) classification:
@@ -52,25 +52,25 @@ For these simulations we are going to use a simulated dataset, and our task will
 Please also note that we defined `random_state=1` in order to make the results reproducible. In theory, [as suggested](https://scikit-learn.org/stable/common_pitfalls.html) by Scikit-learn's User Guide, we should leave `random_state` to the default value in the models (in general you want to estimate the robustness of your algorithms with respect to their random initialization). This way, only the data and the splits will be reproducible, but not the models' results. However, here we want to demonstrate that our code is equivalent to the internal code in `Pipeline`, so we need to set it in the models too in order to have identical results.
 
 ## Example 1
-Let's start with a simple, basic example. We are going to use `Pipeline` with a support vector machine. Please remember that we are not trying to develop a proper machine learning model, but instead to explain how `Pipeline` really works, with plainer code.
+Let's start with a simple, basic example. We are going to use `Pipeline` with a support vector machine. Please remember that we are not trying to develop a proper machine learning model here, but instead to explain how `Pipeline` really works (and how much it saves you!), with plain code.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/d8d503be52ff502a44f9be9351b3b57c.js"></script>
 
-The two approached above return the same exact result, meaning they are equivalent. Basically in this case `Pipeline` is completely useless, since there are no machine learning steps to compose into a unique block. But let's move to a slighlty (we will be going very slow, no worries!) more complex example.
+The two approached above return the same exact result, meaning they are equivalent. Basically in this case `Pipeline` is completely useless, since there are no machine learning steps to compose into a unique block. Let's move to a slighlty more complex example (we will be going very slow, no worries!).
 
 ## Example 2
 Now we actually want to make a real "machine learning pipeline", by scaling first our data and then training a support vector machine.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/63fdfe1c3d3b378cb74eacca80644563.js"></script>
 
-Again, the two results above should be identical. In this case the `Pipeline` object is indeed useful, since we only need to run `fit()` once. Likely, however, `Pipeline` does much more! Let's see another example.
+Again, the two results above should be identical. In this case the `Pipeline` object is indeed useful, since we only need to run `fit()` once. Luckily, `Pipeline` does much more! Let's see another example.
 
 ## Example 3
-We said that a machine learning practitioner could have some problems if not being careful when using a cross-validation procedure. Let's see how `Pipeline` can help us.
+We said that a machine learning practitioner could have some problems if not being careful when using a cross-validation procedure. Let's see how `Pipeline` can help us in this case.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/7c2c11f938e3a9be42ec7dcf756d0295.js"></script>
 
-The code above produces two exact results. And guess what? `Pipeline` applies the defined steps in each different split, solving the data-leakage problem that we discussed before. This is actually done within the `cross_val_score` function, but `Pipeline` allows us to perform those steps as a unique process.
+The code above produces exactly the same results. And guess what? `Pipeline` applies the defined steps in each different split, solving the data leakage problem we discussed before. This is actually done within the `cross_val_score` function, but `Pipeline` allows us to perform those steps as a unique process.
 
 ## Example 4
 I know what you are saying: "Giuseppe, these examples are too simple. I need to optimize my models, I need to optimize the entire pipeline! How is `Pipeline` going to fit into this?". Hey, calm down. Just look below.
@@ -81,7 +81,7 @@ This is a super basic example of the use of a grid search to optimize a model. N
 
 <script src="https://gist.github.com/GiuseppeMagazzu/64e29344e9bbb4da553d91ac72c467fc.js"></script>
 
-This is what you should do to replicate the results of the previous code snippet (more scary snippets to come, if you cannot stand down please stop reading NOW!). And yes, I am hearing what you are saying: "Couldn't I just use grid search after scaling the data?". NO! Read back what we said: if you scale the data outside the cross-validation procedure, you are *contaminating* the splits within the procedure, since they have been scaled with parameters obtained from data which is now in other folders.
+This is what you should do to replicate the results of the previous code snippet (more scary snippets to come, if you cannot stand please stop reading NOW!). And yes, I am hearing what you are saying: "Couldn't I just use `GridSearchCV` after scaling the data?". NO! Read back what we said: if you scale the data outside the cross-validation procedure, you are *contaminating* the splits within the procedure, since they have been scaled with parameters obtained from data which is now in other folders.
 
 ## Example 5
 Let's see how it looks if we have to optimize more than one hyperparameter in our model.
@@ -92,14 +92,14 @@ Without `Pipeline`, a proper validation would require this instead:
 
 <script src="https://gist.github.com/GiuseppeMagazzu/c68d998feb448fbca6f1026e27befdfc.js"></script>
 
-One for-loop more, if compared with our previous example. And we are just optimizing two hyperparameters of one model! Let's see how `Pipeline` can save us code (and time!) in a real situation.
+One for-loop more, if compared with our previous example. And we are just optimizing two hyperparameters for one model! Let's see how `Pipeline` can save us code (and time!) in a real situation.
 
 ## Example 6
 In general, we have to optimize multiple models, and compare their performance. Not only this, we have to optimize the pre-processing in the pipeline, choosing what steps to perform. Here is an example that shows exactly this.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/e03169ccba33f876fa2e7c43c82fed0e.js"></script>
 
-To simulate this, we really need to write a lot of code. Please not how the execution time is very similar, meaning that `Pipeline` is well optimized (as its internal mechanism is not exactly a "for-loop").
+To simulate this, we really need to write a lot of code. Please note how the execution time is very similar, meaning that `Pipeline` is well optimized (as its internal mechanism is not exactly a "for-loop").
 
 <script src="https://gist.github.com/GiuseppeMagazzu/1e17e3a640037af317996468c328e0aa.js"></script>
 
@@ -108,16 +108,16 @@ And now let's see if the two results are identical:
 <script src="https://gist.github.com/GiuseppeMagazzu/483ee14c8df9a4aeb0b36d9fcf662249.js"></script>
 
 ## Example 7
-Finally, for our last example, let's see how `Pipeline` allows us to easily adopt an extremely common and fundamental framework (have a look at my post about nested cross-validation).
+Finally, for our last example, let's see how `Pipeline` allows us to easily adopt an extremely common and fundamental framework (have a look at my post about nested cross-validation 😉).
 First we use `Pipeline` (code inspired by [this](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) Scikit-learn's example).
 
 <script src="https://gist.github.com/GiuseppeMagazzu/703706762e3c397dcd939db8fe4292f8.js"></script>
 
 You ready to see how much code we saved by adopting `Pipeline`, to properly implement a nested cross-validation?
-Here's the code:
+Here it goes:
 
 <script src="https://gist.github.com/GiuseppeMagazzu/f47cd22bd4b557eae5774e488a971dcc.js"></script>
 
 # Conclusion
-I bet you now have realized the importance of adopting `Pipeline` when working on your machine learning projects. Please, remember that the all point of the post was not about how to use `Pipeline`, but about how it works in common every-day frameworks and why you should use it.
-Make your machine learning projects happy, validate them fairly!
+I bet you now have realized the importance of adopting `Pipeline` when working on your machine learning projects 😎. Please, remember that the post was not about how to use `Pipeline`, but about how it works in common every day frameworks and why you should use it.
+Make your machine learning projects happy, validate them properly!
