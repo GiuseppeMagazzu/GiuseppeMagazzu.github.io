@@ -49,7 +49,7 @@ For these simulations we are going to use a simulated dataset, and our task will
 
 <script src="https://gist.github.com/GiuseppeMagazzu/fbbff3db1a4a8f8cbffe98fe13a20986.js"></script>
 
-Please also note that we defined `random_state=1` in order to make the results reproducible. In theory, [as suggested](https://scikit-learn.org/stable/common_pitfalls.html) by Scikit-learn's User Guide, we should leave `random_state` to the default value in the models (in general you want to estimate the robustness of your algorithms with respect to their randomness). This way, only the data and the splits will be reproducible, but not the model. However, we want to demonstrate that our code is equivalent to the internal code in `Pipeline`, so the results need to be identical.
+Please also note that we defined `random_state=1` in order to make the results reproducible. In theory, [as suggested](https://scikit-learn.org/stable/common_pitfalls.html) by Scikit-learn's User Guide, we should leave `random_state` to the default value in the models (in general you want to estimate the robustness of your algorithms with respect to their random initialization). This way, only the data and the splits will be reproducible, but not the models' results. However, here we want to demonstrate that our code is equivalent to the internal code in `Pipeline`, so we need to set it in the models too in order to have identical results.
 
 ## Example 1
 Let's start with a simple, basic example. We are going to use `Pipeline` with a support vector machine. Please remember that we are not trying to develop a proper machine learning model, but instead to explain how `Pipeline` really works, with plainer code.
