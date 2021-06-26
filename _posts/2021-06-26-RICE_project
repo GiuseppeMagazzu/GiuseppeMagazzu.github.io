@@ -1,20 +1,19 @@
 ---
 title: "Binary Classification of types of Turkish Rice"
 layout: post
-date: 2021-06-26 17:230
+date: 2021-06-26 18:09
+tag:
+- classification
+- binary
+- balanced
 image: /assets/images/markdown.jpg
 headerImage: False
-tag:
-- scikit-learn
-- pipeline
-- cross-validation
-- data-leakage
-category: project
-author: giuseppemagazzu
-description: Binary balanced classification problem of types of Turkish Rice
-externalLink: false
 projects: true
 hidden: true
+description: Binary balanced classification problem of types of Turkish Rice
+category: project
+author: giuseppemagazzu
+externalLink: false
 ---
 
 Data science is simple. You just take some data, choose a bunch of algorithms that you want to try, and use them. 
