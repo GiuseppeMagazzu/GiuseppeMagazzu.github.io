@@ -1,5 +1,5 @@
 ---
-title: "Scikit-learn's Pipeline: How it works and Why you should use it"
+title: "Binary Classification of Turkish types of Rice"
 layout: post
 date: 2021-06-23 22:48
 image: /assets/images/markdown.jpg
@@ -10,8 +10,8 @@ tag:
 - cross-validation
 - data-leakage
 star: False
-category: blog
-projects: True
+category: project
+# projects: True
 author: giuseppemagazzu
 description: Importance and usage of Scikit-learn's Pipeline
 ---
