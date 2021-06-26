@@ -11,6 +11,7 @@ tag:
 - data-leakage
 star: False
 category: blog
+projects: True
 author: giuseppemagazzu
 description: Importance and usage of Scikit-learn's Pipeline
 ---
