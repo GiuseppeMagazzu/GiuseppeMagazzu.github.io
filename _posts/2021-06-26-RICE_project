@@ -1,5 +1,5 @@
 ---
-title: "Binary Classification of Turkish types of Rice"
+title: "Binary Classification of types of Turkish Rice"
 layout: post
 date: 2021-06-23 22:48
 image: /assets/images/markdown.jpg
@@ -11,9 +11,8 @@ tag:
 - data-leakage
 star: False
 category: project
-# projects: True
 author: giuseppemagazzu
-description: Importance and usage of Scikit-learn's Pipeline
+description: Binary balanced classification problem of types of Turkish Rice
 ---
 Data science is simple. You just take some data, choose a bunch of algorithms that you want to try, and use them. 
 Ah, yes. You first split your data into training and test samples, so that you can get an unbiased estimate of your models. Right?
