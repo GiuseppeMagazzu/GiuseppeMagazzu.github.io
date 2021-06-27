@@ -1,5 +1,5 @@
 ---
-title: "Binary Classification of types of Turkish Rice"
+title: "Binary Classification of types of Rice"
 layout: post
 date: 2021-06-26 18:09
 image: /assets/images/markdown.jpg
@@ -12,19 +12,15 @@ projects: true
 hidden: true
 category: project
 author: giuseppemagazzu
-description: Binary balanced classification problem of types of Turkish Rice
+description: Binary balanced classification problem of types of Rice
 ---
-Data science is simple. You just take some data, choose a bunch of algorithms that you want to try, and use them. 
-Ah, yes. You first split your data into training and test samples, so that you can get an unbiased estimate of your models. Right?
+In this project we are going to see a machine learning pipeline for the binary classification of types of rice. The purpose of the project is to build a classification system as a simple data modeling exercise. The choice of the dataset was driven by its lack of missing data, the two balanced classes and the small number of features/predictors, all numeric.
+# Data
+The data were taken from the online repository [UCI](https://archive.ics.uci.edu/ml/index.php), one of the most famous and old machine learning repository free available on the Internet. The data for this project can be downloaded from [here](https://archive.ics.uci.edu/ml/datasets/Rice+%28Cammeo+and+Osmancik%29). Let's have a look first at the features in the dataset and the classes.
 
-# Proper model building and validation is not that simple
-How many times have you tried to solve an "apparently simple" task, finding that your performance barely reaches the minimum required by your application?
-Probably way too many. But why, you could wonder, since you have had a very good performance on your training set, with robustness taken into account by adopting a cross-validation procedure?
+<script src="https://gist.github.com/GiuseppeMagazzu/94d7588a745785327d2d7a5cd32473e0.js"></script>
 
-I have seen countless times, even on very professional platforms such as [Kaggle](https://www.kaggle.com/), such naive approach to model building and validation.
-No, don't get me wrong. The above approach is fine in many cases. But when you have to conduct several pre-processing steps, apply some feature selection techniques or balance a dataset with upsampling/downsampling or similar procedures, then that approach is very likely not to work.
-
-The reason is very simple: such procedure does not take into account the randomness in the data and the fact that some patterns and properties in the training set could simply be spurious. In this case, if we base our pre-processing on the global characteristics of the training data (all together), there is the real risk that these characteristics are not truly associated to our data. In other words, not every subset of the data shares these properties, meaning that if we base our model building procedure on them we will be very disappointed when we apply the same techniques on the test data.
+<script src="https://gist.github.com/GiuseppeMagazzu/e70085d48b91414dad4fc7929e45aca5.js"></script>
 
 # The cause is Data Leakage
 What is data leakage? It is that very common mistake consisting in sharing some information from the test set with the training set, therefore invalidating your entire model building and evaluation pipeline. But wait, how can you leak some information from the test set to the training set, if you have split the data before doing anything else and never looked at the test set before the finalization of the model?
