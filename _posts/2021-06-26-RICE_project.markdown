@@ -52,3 +52,17 @@ Now let's have a look at the distribution of the features according to the class
 <script src="https://gist.github.com/GiuseppeMagazzu/284af92da55bacdaf1a9bd6866a4fa47.js"></script>
 
 It is interesting to see that, except for `EXTENT` and `MINORAXIS`, the other features have a veri distinct distribution across the two classes. This partially confirms what we have seen in the heatmap above.
+
+However, box plots lack the ability of detecting multiple peaks in the distribution of the features. Violin plots can solve this:
+
+<script src="https://gist.github.com/GiuseppeMagazzu/ad5c5b36fe754b36d6f8e293128af389.js"></script>
+
+Interestingly, `EXTENT` presents a bimodal distribution for both classes, which further coherently with the correlation heatmap that showed how uncorrelated it was with the other features. We could not see this with the boxplot.
+
+Another type of plot useful to investigate our data is the biplot. Scikit-learn does not provide directly a function to generate it (nor do Matplotlib or Seaborn), so I used seralouk's answer to [this](https://stackoverflow.com/questions/39216897/plot-pca-loadings-and-loading-in-biplot-in-sklearn-like-rs-autoplot) question:
+
+<script src="https://gist.github.com/GiuseppeMagazzu/38f6688d0404ff2819baa1ba3c477e70.js"></script>
+
+Again, this plot shows the same information we have obtained from the other plots: `AREA`, `CONVEX_AREA`, `PERIMETER` and `MAJORAXIS` are highly correlated, while `EXTENT` is the least correlated reamining feature. We can also see how the two classes are easily separable when mapped onto the space of principal components, which could suggest to compute the first two components in the pre-processing stage.
+
+
