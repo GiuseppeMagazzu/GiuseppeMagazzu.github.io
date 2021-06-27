@@ -47,8 +47,7 @@ Let's now visualize the correlation (pearson) among features.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/fb9ba10da62fb69d6d8864aa816d87ad.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/
-correlation_heatmap.png" /></div>
+<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/correlation_heatmap.png" /></div>
 
 As we can see, many featurers are highly correlated with others. This is not suprising, since all these features represent physical characteristics which are strictly related to each other. This could suggest that we have to filter out some of them to attenuate the problem of multicollinearity.
 
@@ -56,8 +55,7 @@ Now let's have a look at the distribution of the features according to the class
 
 <script src="https://gist.github.com/GiuseppeMagazzu/284af92da55bacdaf1a9bd6866a4fa47.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/
-boxplot.png" /></div>
+<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/boxplot.png" /></div>
 
 It is interesting to see that, except for `EXTENT` and `MINORAXIS`, the other features have a veri distinct distribution across the two classes. This partially confirms what we have seen in the heatmap above.
 
