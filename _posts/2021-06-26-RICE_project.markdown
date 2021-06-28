@@ -74,3 +74,26 @@ Another type of plot useful to investigate our data is the biplot. Scikit-learn 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/biplot.png" /></div>
 
 Again, this plot shows the same information we have obtained from the other plots: `AREA`, `CONVEX_AREA`, `PERIMETER` and `MAJORAXIS` are highly correlated, while `EXTENT` is the least correlated reamining feature. We can also see how the two classes are easily separable when mapped onto the space of principal components, which could suggest to compute the first two components in the pre-processing stage.
+
+Finally, let's have a look at some scatter plots to see whether there are some evident interactions among the features.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/c8ea5c55eee92da06a4c97c05e41efaa.js"></script>
+
+<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot.png" /></div>
+
+It seems interesting the boundary between the two classes when plotting `AREA` and `MINORAXIS` (also in other plots), so what about trying to capture "the information" contained in the line $`y=x`$ (actually it is not exactly that line, but you know what I mean 😉). Let's have a look at a new scatter plot then.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/d234bfa4e10e42e389af20255d239d56.js"></script>
+
+<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot2.png" /></div>
+
+Also, another interesting feature we could compute and add is the distance of each sample from the "average sample" across classes (different distances for different features). Below I computed it only for those features which seemed to be most discriminative according to the box plots (which are also the ones that is more reasonable to compute in general).
+
+<script src="https://gist.github.com/GiuseppeMagazzu/5b69adf5abcea11016a251fd52198011.js"></script>
+
+<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/violinplot2.png" /></div>
+
+
+
+
+
