@@ -81,7 +81,7 @@ Finally, let's have a look at some scatter plots to see whether there are some e
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot.png" /></div>
 
-It seems interesting the boundary between the two classes when plotting `AREA` and `MINORAXIS` (also in other plots), so what about trying to capture "the information" contained in the line ![equation](http://latex.codecogs.com/gif.latex?y%3D%5Ctext%20%7B%20x) (actually it is not exactly that line, but you know what I mean 😉). Let's have a look at a new scatter plot then.
+It seems interesting the boundary between the two classes when plotting `AREA` and `MINORAXIS` (also in other plots), so what about trying to capture "the information" contained in the line ![equation](http://latex.codecogs.com/png.latex?y%3D%5Ctext%20%7B%20x) (actually it is not exactly that line, but you know what I mean 😉). Let's have a look at a new scatter plot then.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/d234bfa4e10e42e389af20255d239d56.js"></script>
 
