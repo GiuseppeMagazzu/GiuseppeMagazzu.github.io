@@ -111,4 +111,49 @@ It seems like some features do not have a gaussian-like distribution (we already
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/histogram2.png" /></div>
 
-It seems now that we have solved "the problem". Let's proceed to defining some useful functions to use in our pipeline (literally, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
+It seems now that we have solved "the problem". Let's proceed to defining some useful functions to use in our pipeline (literally 😁, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
+
+Let's first define a transformer for filtering out the highly correlated features (code from `fit()` taken from [this answer](https://stackoverflow.com/questions/49282049/remove-strongly-correlated-columns-from-dataframe):
+
+<script src="https://gist.github.com/GiuseppeMagazzu/30a0f900b35decd084f2eb2232b44a58.js"></script>
+
+Also, we need a transformer to compute the new `AREA/MINORAXIS` column.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/1f87efa1e15a6871523cb0d1b5f90ca6.js"></script>
+
+And we also need a transformer for computing the distance-based features.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/b8d170b0cabed08a68ede7b221507fa6.js"></script>
+
+Finally, a useful transformer that could come in handy.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/6bb91caa708467806977ca124d03c565.js"></script>
+
+Now, a clarification. One of the flaws of Scikit-learn is the lack of support for dataframes in `Pipeline`. You can actually use `DataFrame` in it, but Scikit-learn converts into automatically into a numpy matrix. The problem is, how do you define the columns in the above transformers then? For this reason, we are going to use  [Sklearn-pandas](https://github.com/scikit-learn-contrib/sklearn-pandas), that allows us to "retain" the columns. For a similar reason (and for an easier interpretation of the results, not in this blog post), we defined the transformer `RenameColumn` above. 
+
+It is time to define the entire pipeline with the optimization parameters (or steps, in this case), including the data pre-processing. As I explained in the [blog post](https://giuseppemagazzu.github.io/pipeline_study/) regarding `Pipeline`, it is necessary to conduct the pre-processing within the cross-validation framework we are adopting.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/09468e560bdc78e619abfd68c42cc734.js"></script>
+
+In the code above, we define our general pipeline (`pipe`), then define the possible combination of data pre-processing (meaning leaving the datasets as it is, adding one or more features) in `feature_engineering_options` and finally choose three models and define their hyperparameters to optimize (`params`). We standardize (i.e. centre-scale) the data first as Linear Discriminant Analysis (LDA) and support vector machines require that features are on the same scale.
+
+The choice of the models was driven by two reasons: support vector machines and random forests are models which have performed very well in a large variety of tasks, while LDA is recommended when the number of samples is higher than the number of features and the features have a normal distribution (which is our case after the pre-processing). I also did nont want to use any neural network architecture on purpose.
+
+The removal of the highly correlated features was set to be performed after the reduction of their skewness as suggested by Jeromy Anglim in [this answer](https://stats.stackexchange.com/questions/3730/pearsons-or-spearmans-correlation-with-non-normal-data). 
+
+The cross-validation chosen was the nested cross-validation (please refer to my blog post for more information about it) framework. Contrary to Scikit-learn's [example](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) here we will not use `cross_val_score` since this does not allow to see which models were chosen in each of the splits (for more information about what this function does, have a look at [this other post](https://giuseppemagazzu.github.io/pipeline_study/) of mine). I will not show my personal results here but here's the code to save them and visualize them later: 
+
+<script src="https://gist.github.com/GiuseppeMagazzu/22263055bd5a87f599d7e34e60cef8d0.js"></script>
+
+N.B. For each run in the outer loop (for a total of five) it took about 4h 30min on Google Colaboratory. So make sure you have the time to run it!
+
+If you visualize the results for each outer split you might see different models/hyperparameters. That is expected and totally fine, as long as the standard deviation of the `outer_scores` is low. That means that our cross-validation procedure is robust and we can confidently say that our performance is very close to the one obtained in the outer loop.
+
+Let's now verify this by finalizing a model. This is done by running the model selection procedure used in the inner loop on the entire training set.
+
+<script src="https://gist.github.com/GiuseppeMagazzu/76276577fde7e7ba966f520c761bfa6f.js"></script>
+
+We have now our final model. Its performance on the test set will be very similar to the performance in the outer loop in our nested cross-validation. You can try it yourself, just remember to use the same encoding you used on the training set to encode the class labels on the test set!
+
+
+
