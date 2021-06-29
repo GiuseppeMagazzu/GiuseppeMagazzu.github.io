@@ -39,7 +39,7 @@ Let's fist visualize the distribution of the two classes.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/ea61f9e10b6e577b9ffdcbc3a861e968.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/class_distribution.png" /></div>
+<div class="center"><img text-align="center" src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/class_distribution.png" /></div>
 
 As we can see, the classes are balanced (the small difference is smoothly negligible)
 
