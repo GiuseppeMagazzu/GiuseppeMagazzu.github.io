@@ -47,7 +47,7 @@ Let's now visualize the correlation (pearson) among features.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/fb9ba10da62fb69d6d8864aa816d87ad.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/correlation_heatmap.png" /></div>
+<div align="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/correlation_heatmap.png" /></div>
 
 As we can see, many featurers are highly correlated with others. This is not suprising, since all these features represent physical characteristics which are strictly related to each other. This could suggest that we have to filter out some of them to attenuate the problem of multicollinearity.
 
@@ -71,7 +71,7 @@ Another type of plot useful to investigate our data is the biplot. Scikit-learn 
 
 <script src="https://gist.github.com/GiuseppeMagazzu/38f6688d0404ff2819baa1ba3c477e70.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/biplot.png" /></div>
+<div align="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/biplot.png" /></div>
 
 Again, this plot shows the same information we have obtained from the other plots: `AREA`, `CONVEX_AREA`, `PERIMETER` and `MAJORAXIS` are highly correlated, while `EXTENT` is the least correlated reamining feature. We can also see how the two classes are easily separable when mapped onto the space of principal components, which could suggest to compute the first two components in the pre-processing stage.
 
@@ -85,7 +85,7 @@ It seems interesting the boundary between the two classes when plotting `AREA` a
 
 <script src="https://gist.github.com/GiuseppeMagazzu/d234bfa4e10e42e389af20255d239d56.js"></script>
 
-<div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot2.png" /></div>
+<div align="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot2.png" /></div>
 
 Also, another interesting feature we could compute and add is the distance of each sample from the "average sample" across classes (different distances for different features). Below I computed it only for those features which seemed to be most discriminative according to the box plots (which are also the ones that is more reasonable to compute in general).
 
