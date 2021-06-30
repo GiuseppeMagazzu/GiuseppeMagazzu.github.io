@@ -82,7 +82,6 @@ Finally, let's have a look at some scatter plots to see whether there are some e
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot.png" /></div>
 
 # Feature engineering
-
 The boundary between the two classes when plotting `AREA` and `MINORAXIS` (also in other plots) seems interesting, so what about trying to capture the information "defined" by the line y=x (actually it is not exactly that line, but you know what I mean 😉). Let's have a look at a new scatter plot then.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/d234bfa4e10e42e389af20255d239d56.js"></script>
@@ -108,20 +107,18 @@ And what about the distribution of all the features when comparing directly the 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/histogram.png" /></div>
 
 ## Data pre-processing
-
 It seems like some features do not have a gaussian-like distribution (we already knew that for `EXTENT` from the violin plots, but now we can also notice it for the distance-based features, also shown in the second violin plot). It could be a good idea to make them gaussian in order to be able to use certain models (such us Linear Discriminant Analysis, used below).
 
 <script src="https://gist.github.com/GiuseppeMagazzu/36fda5f811f14e4ed6c5d98fd7cebb72.js"></script>
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/histogram2.png" /></div>
 
-## Pipeline definition
+# Pipeline building
 
-# Transformers definition
+## Transformers definition
+It seems now that we have solved the "problem". Let's proceed to defined some useful functions to use in our pipeline (literally 😁, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
 
-It seems now that we have solved the "problem". Let's proceed to defining some useful functions to use in our pipeline (literally 😁, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
-
-Let's first define a transformer for filtering out the highly correlated features (code from `fit()` taken from [this answer](https://stackoverflow.com/questions/49282049/remove-strongly-correlated-columns-from-dataframe):
+Let's first define a transformer for filtering out the highly correlated features (code from `fit()` taken from [this answer](https://stackoverflow.com/questions/49282049/remove-strongly-correlated-columns-from-dataframe)):
 
 <script src="https://gist.github.com/GiuseppeMagazzu/30a0f900b35decd084f2eb2232b44a58.js"></script>
 
@@ -129,7 +126,7 @@ Also, we need a transformer to compute the new `AREA/MINORAXIS` column.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/1f87efa1e15a6871523cb0d1b5f90ca6.js"></script>
 
-And we also need a transformer for computing the distance-based features.
+Likewise, we need a transformer for computing the distance-based features.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/b8d170b0cabed08a68ede7b221507fa6.js"></script>
 
@@ -137,8 +134,9 @@ Finally, a useful transformer that could come in handy.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/6bb91caa708467806977ca124d03c565.js"></script>
 
-Now, a clarification. One of the flaws of Scikit-learn is the lack of support for dataframes in `Pipeline`. You can actually use `DataFrame` in it, but Scikit-learn converts into automatically into a numpy matrix. The problem is, how do you define the columns in the above transformers then? For this reason, we are going to use  [Sklearn-pandas](https://github.com/scikit-learn-contrib/sklearn-pandas), that allows us to "retain" the columns. For a similar reason (and for an easier interpretation of the results, not in this blog post), we defined the transformer `RenameColumn` above. 
+Now, a clarification. One of the "flaws" of Scikit-learn is the lack of support for dataframes in `Pipeline`. You can actually use `DataFrame` in it, but Scikit-learn will convert in automatically into a numpy matrix. The problem is, how do you pass the columns to the above transformers then? For this reason, we are going to use  [Sklearn-pandas](https://github.com/scikit-learn-contrib/sklearn-pandas), a very useful library that allows us to "retain" the columns. With the same rationale (and for an easier interpretation of the results, not in this blog post), we defined the transformer `RenameColumn` above. 
 
+## Pipeline definition
 It is time to define the entire pipeline with the optimization parameters (or steps, in this case), including the data pre-processing. As I explained in the [blog post](https://giuseppemagazzu.github.io/pipeline_study/) regarding `Pipeline`, it is necessary to conduct the pre-processing within the cross-validation framework we are adopting.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/09468e560bdc78e619abfd68c42cc734.js"></script>
@@ -162,6 +160,3 @@ Let's now verify this by finalizing a model. This is done by running the model s
 <script src="https://gist.github.com/GiuseppeMagazzu/76276577fde7e7ba966f520c761bfa6f.js"></script>
 
 We have now our final model. Its performance on the test set will be very similar to the performance in the outer loop in our nested cross-validation. You can try it yourself, just remember to use the same encoding you used on the training set to encode the class labels on the test set!
-
-
-
