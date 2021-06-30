@@ -89,13 +89,13 @@ The boundary between the two classes when plotting `AREA` and `MINORAXIS` (also 
 
 <div align="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/scatterplot2.png" /></div>
 
-Also, another interesting feature we could compute and add is the distance of each sample from the "average sample" across classes (different distances for different features). Below I computed it only for those features which seemed to be most discriminative according to the box plots (which are also the ones that is more reasonable to compute in general).
+Also, another interesting feature we could compute and add is the distance of each sample from the "average sample" across classes (with different distances for different features). Below I computed it only for those features which seemed to be most discriminative according to the box plots (which are clearly the ones that is more reasonable to compute in general).
 
 <script src="https://gist.github.com/GiuseppeMagazzu/5b69adf5abcea11016a251fd52198011.js"></script>
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/violinplot2.png" /></div>
 
-From the violin plots they seem useful. Now let's see how correlated all these new features are correlated with the original ones.
+From the violin plots they seem useful. Now let's see how correlated all these new features are with the original ones.
 
 <script src="https://gist.github.com/GiuseppeMagazzu/9efb9fd2cfb7a921115f321dd8501cda.js"></script>
 
@@ -107,13 +107,19 @@ And what about the distribution of all the features when comparing directly the 
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/histogram.png" /></div>
 
-It seems like some features do not have a gaussian-like distribution (we already knew that for `EXTENT` from the violin plots, but now we can also notice it for the distance-based features). It could be a good idea to make them gaussian in order to let certain models to learn better the data (such us Linear Discriminant Analysis, used below).
+## Data pre-processing
+
+It seems like some features do not have a gaussian-like distribution (we already knew that for `EXTENT` from the violin plots, but now we can also notice it for the distance-based features, also shown in the second violin plot). It could be a good idea to make them gaussian in order to be able to use certain models (such us Linear Discriminant Analysis, used below).
 
 <script src="https://gist.github.com/GiuseppeMagazzu/36fda5f811f14e4ed6c5d98fd7cebb72.js"></script>
 
 <div class="center"><img src="https://raw.githubusercontent.com/GiuseppeMagazzu/GiuseppeMagazzu.github.io/master/assets/images/2021-06-26-RICE_project/histogram2.png" /></div>
 
-It seems now that we have solved "the problem". Let's proceed to defining some useful functions to use in our pipeline (literally 😁, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
+## Pipeline definition
+
+# Transformers definition
+
+It seems now that we have solved the "problem". Let's proceed to defining some useful functions to use in our pipeline (literally 😁, check my [blog post](https://giuseppemagazzu.github.io/pipeline_study/)!). To be used these functions will take the shape of [transformers](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin).
 
 Let's first define a transformer for filtering out the highly correlated features (code from `fit()` taken from [this answer](https://stackoverflow.com/questions/49282049/remove-strongly-correlated-columns-from-dataframe):
 
