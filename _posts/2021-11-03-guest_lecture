@@ -8,8 +8,7 @@ tag:
 - regression
 - computational biology
 - systems biology
-projects: false
-hidden: true
+star: False
 category: blog
 author: giuseppemagazzu
 description: Guest Lecture on Multi-Omic data integration - A Case Study
