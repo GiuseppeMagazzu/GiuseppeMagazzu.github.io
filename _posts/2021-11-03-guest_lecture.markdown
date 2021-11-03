@@ -1,5 +1,5 @@
 ---
-title: "Guest Lecture"
+title: "Guest Lecture on Multi-Omic data integration - A Case Study"
 layout: post
 date: 2021-11-03 22:30
 image: /assets/images/markdown.jpg
