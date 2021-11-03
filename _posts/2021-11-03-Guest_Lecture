@@ -1,0 +1,21 @@
+---
+title: "Guest Lecture"
+layout: post
+date: 2021-11-03 22:30
+image: /assets/images/markdown.jpg
+headerImage: False
+tag:
+- regression
+- computational biology
+- systems biology
+projects: false
+hidden: true
+category: blog
+author: giuseppemagazzu
+description: Guest Lecture on Multi-Omic data integration - A Case Study
+---
+Last week I was asked by a friend to give a guest lecture to some students attending courses in Mathematics and Computer Science. The students had no knowledge 
+regarding machine and deep learning, nor regarding computational and systems biology. I was explicitly told not to make things too complicated 😅, which is why in 
+the lecture I focused on concepts rather than mathematical aspects and methods.
+
+Here's the video of the lecture:
