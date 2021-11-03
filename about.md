@@ -9,7 +9,7 @@ in solving actual problems to improve the world in which we live. I also
 love chess, politics and whatever part of human knowledge I manage to understand 😉. </p>
 
 <p>Being Sicilian, I can definitely say that my background contributed to my being skeptic towards 
-any no evidence-based "revolutionary" discovery/technology.</p>
+any non-evidence-based "revolutionary" discovery/technology.</p>
 
 <p>Lived in Italy, California and currently based in England.</p>
 
